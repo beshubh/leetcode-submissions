@@ -1,31 +1,26 @@
 class Solution:
-
-    def is_palindrome(self, s, i , j):
-        while i <= j:
-            if s[i] != s[j]:
-                return False
-            i, j = i + 1, j - 1
-        return True
-
     def longestPalindrome(self, s: str) -> str:
-        best = (0, 0)
-        if len(s) <= 1:
-            return s
-        start = 0
-        max_len = 0
-
-        def expand(left, right):
-            nonlocal start, max_len
-            while left >= 0 and right < len(s) and s[left] == s[right]:
-                curr_len = right - left + 1
-                if curr_len > max_len:
-                    max_len = curr_len
-                    start = left
+        longest = 0
+        result = ""
+        n = len(s)
+        for i in range(len(s)):
+            # odd length
+            left, right = i - 1, i + 1
+            while left >= 0 and right < n and s[left] == s[right]:
                 left -= 1
                 right += 1
-
-        for i in range(len(s)):
-            expand(i, i) # odd
-            expand(i, i + 1) # even
-        return s[start:start + max_len]
-    
+            if right - left + 1 > longest:
+                longest = right - left + 1
+                result = s[left + 1:right]
+            
+            # even length
+            left, right = i, i + 1
+            while left >= 0 and right < n and s[left] == s[right]:
+                left -= 1
+                right += 1
+        
+            if right - left + 1 > longest:
+                longest = right - left + 1
+                result = s[left + 1:right]
+        return result
+             

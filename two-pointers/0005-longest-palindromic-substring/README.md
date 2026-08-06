@@ -2,9 +2,9 @@
 
 - Language: python3
 - Question ID: 5
-- Accepted At: 2026-05-18T06:38:52.000Z
+- Accepted At: 2026-08-06T14:13:34.000Z
 - LeetCode: https://leetcode.com/problems/longest-palindromic-substring/
-- Tags: Two Pointers, String, Dynamic Programming
+- Tags: Two Pointers, String, Dynamic Programming, Manacher
 
 ## Solution
 

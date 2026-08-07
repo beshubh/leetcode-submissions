@@ -9,14 +9,18 @@ class Solution:
                 return False
             if (r, c) in seen:
                 return False
-            seen.add((r, c))
             if word[wi] != board[r][c]:
                 return False 
-            return (go(wi + 1, r + 1, c) or
+            seen.add((r, c))
+            result = (
+                go(wi + 1, r + 1, c) or
                 go(wi + 1, r - 1, c) or
                 go(wi + 1, r, c + 1) or
                 go(wi + 1, r, c - 1)
             )
+            if not result:
+                seen.remove((r, c))
+            return result
 
         for i in range(ROWS):
             for j in range(COLS):
@@ -25,5 +29,3 @@ class Solution:
                     if go(0, i, j):
                         return True
         return False
-
-        

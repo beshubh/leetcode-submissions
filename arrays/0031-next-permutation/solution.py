@@ -11,17 +11,18 @@ class Solution:
         if pivot == -1:
             nums.sort()
             return
-        swap_idx = -1
+        swap = -1
         for i in range(pivot + 1, len(nums)):
-            if swap_idx == -1:
-                if nums[i] > nums[pivot]:
-                    swap_idx = i
-            else:
-                if nums[i] > nums[pivot] and nums[i] < nums[swap_idx]:
-                    swap_idx = i
-        nums[pivot], nums[swap_idx] = nums[swap_idx], nums[pivot]
-        for i in range(pivot + 1, len(nums)):
-            for j in range(pivot + 1, len(nums) - 1):
-                if nums[j] > nums[j + 1]:
-                    nums[j], nums[j + 1] = nums[j + 1], nums[j]
-        
+            if nums[i] > nums[pivot]:
+                if swap == -1:
+                    swap = i
+                elif nums[i] <= nums[swap]:
+                    swap = i
+        nums[pivot], nums[swap] = nums[swap], nums[pivot]
+        left, right = pivot + 1, len(nums) - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
+
+

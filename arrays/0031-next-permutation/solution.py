@@ -9,15 +9,13 @@ class Solution:
                 pivot = i
                 break
         if pivot == -1:
-            nums.sort()
+            nums.reverse()
             return
         swap = -1
-        for i in range(pivot + 1, len(nums)):
+        for i in range(len(nums) - 1, pivot, -1):
             if nums[i] > nums[pivot]:
-                if swap == -1:
-                    swap = i
-                elif nums[i] <= nums[swap]:
-                    swap = i
+                swap = i
+                break
         nums[pivot], nums[swap] = nums[swap], nums[pivot]
         left, right = pivot + 1, len(nums) - 1
         while left < right:

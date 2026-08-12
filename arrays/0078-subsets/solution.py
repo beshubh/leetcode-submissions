@@ -1,19 +1,23 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        used = [False] * len(nums)
-        output = []
+        seen = set()
         current = []
-        def backtrack(i: int):
+        result = []
+
+        def go(i: int):
             if i >= len(nums):
-                output.append(current.copy())
+                result.append(current.copy())
                 return
-            # choose it if not chosen
-            if not used[i]:
-                used[i] = True
+            # take it
+            if i not in seen:
+                seen.add(i)
                 current.append(nums[i])
-                backtrack(i + 1)
+                go(i + 1)
+                seen.remove(i)
                 current.pop()
-                used[i] = False
-            backtrack(i + 1)
-        backtrack(0)
-        return output
+            
+            go(i + 1)
+        go(0)
+        return result
+
+

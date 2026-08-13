@@ -25,7 +25,7 @@ class Solution:
             window[ch] += 1
             if window[ch] == t_count[ch]:
                 have += 1
-            while have >= need:
+            while have == need:
                 window[s[left]] -= 1
                 if right - left < result[1] - result[0]:
                     result = (left, right)

@@ -1,10 +1,10 @@
 class Solution:
-    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        stack = []
-        answer = [0]*len(temperatures)
-        for i, t in enumerate(temperatures):
-            while stack and stack[-1][0] < t:
-                top = stack.pop()
-                answer[top[1]] = i - top[1]
-            stack.append((t, i)) 
+    def dailyTemperatures(self, temps: List[int]) -> List[int]:
+        monostack = []
+        answer = [0] * len(temps)
+        for i in range(len(temps)):
+            while monostack and temps[monostack[-1]] < temps[i]:
+                answer[monostack[-1]] = i - monostack[-1]
+                monostack.pop()
+            monostack.append(i)
         return answer

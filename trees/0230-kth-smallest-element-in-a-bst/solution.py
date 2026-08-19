@@ -4,19 +4,21 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        order = []
-        if not root:
-            return 0
         stack = []
-        curr = root
-        while curr or stack:
-            while curr:
-                stack.append(curr)
-                curr = curr.left
-            curr = stack.pop()
-            k -= 1
-            if k == 0:
-                return curr.val
-            curr = curr.right
+        current  = root
+        order = []
+        while stack or current:
+            if current:
+                stack.append(current)
+                current = current.left
+            else:
+                r = stack.pop()
+                order.append(r.val)
+                current = r.right
+            if len(order) == k:
+                return order[k - 1]
+

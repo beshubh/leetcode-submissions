@@ -3,24 +3,31 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        pivot = -1
-        for i in range(len(nums) - 2, -1, -1):
+        n = len(nums)
+        smaller_idx = -1
+        for i in range(n - 2, -1, -1):
             if nums[i] < nums[i + 1]:
-                pivot = i
+                smaller_idx = i
                 break
-        if pivot == -1:
+            
+        if smaller_idx == -1:
             nums.reverse()
-            return
-        swap = -1
-        for i in range(len(nums) - 1, pivot, -1):
-            if nums[i] > nums[pivot]:
-                swap = i
+            return 
+        swap_idx = -1 
+        for i in range(n - 1, -1, -1):
+            if nums[i] > nums[smaller_idx]:
+                swap_idx = i
                 break
-        nums[pivot], nums[swap] = nums[swap], nums[pivot]
-        left, right = pivot + 1, len(nums) - 1
-        while left < right:
-            nums[left], nums[right] = nums[right], nums[left]
-            left += 1
-            right -= 1
+        
+        if swap_idx == -1:
+            # should be an impossibility?
+            return
+        nums[smaller_idx], nums[swap_idx] = nums[swap_idx], nums[smaller_idx]
+        
+        l, r = smaller_idx + 1, n - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l += 1
+            r -= 1
 
-
+        
